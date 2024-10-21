@@ -19,7 +19,7 @@ class BurgerScreen extends StatelessWidget {
                 Container(
                   width: 300,
                   height: 300,
-                  color: Colors.red,
+                  color: Color(0xFFFF0000),
                   padding: EdgeInsets.all(16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
