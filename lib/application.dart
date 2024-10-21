@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jkb_sept/screens/burger_screen.dart';
 import 'package:jkb_sept/screens/home_screen.dart';
 
 class Application extends StatelessWidget {
