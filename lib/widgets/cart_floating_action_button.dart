@@ -1,3 +1,4 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 
 class CartFloatingActionButton extends StatelessWidget {
@@ -27,7 +28,7 @@ class CartFloatingActionButton extends StatelessWidget {
           ),
         ),
         child: const Icon(
-          Icons.shopping_bag_rounded,
+          FluentIcons.shopping_bag_24_filled,
           size: 30,
           color: Colors.white,
         ),

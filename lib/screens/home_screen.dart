@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:jkb_sept/models/product.dart';
 import 'package:jkb_sept/screens/cart_screen.dart';
 import 'package:jkb_sept/widgets/cart_floating_action_button.dart';
@@ -51,43 +52,60 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-      ),
-      floatingActionButton: CartFloatingActionButton(
-        onTap: () {
-          log('button kisine press kiya');
-          Navigator.of(context).push<Map<int, int>>(
-            MaterialPageRoute(
-              builder: (context) {
-                return CartScreen(cart: cart);
-              },
-            ),
-          ).then((value) {
-            setState(() {
-              if (value != null) {
-                cart = value;
-              }
+        appBar: AppBar(
+          title: const Text('Home'),
+        ),
+        floatingActionButton: CartFloatingActionButton(
+          onTap: () {
+            log('button kisine press kiya');
+            Navigator.of(context).push<Map<int, int>>(
+              MaterialPageRoute(
+                builder: (context) {
+                  return CartScreen(cart: cart);
+                },
+              ),
+            ).then((value) {
+              setState(() {
+                if (value != null) {
+                  cart = value;
+                }
+              });
             });
-          });
-        },
-      ),
-      body: ListView.separated(
-        itemCount: products.length,
-        itemBuilder: (context, index) {
-          final product = products[index];
-          return ProductListTile(
-            product: product,
-            quantity: getQuantity(product),
-            onTapAdd: () => addItemButtonClickEvent(product),
-            onTapRemove: () => removeItemButtonClickEvent(product),
-          );
-        },
-        separatorBuilder: (context, index) {
-          return const Divider(height: 1);
-        },
-      ),
-    );
+          },
+        ),
+        body: Column(
+          children: [
+            Image(
+              image: AssetImage(
+                'assets/bell_icon.png',
+              ),
+              fit: BoxFit.cover,
+              height: 200,
+              width: 200,
+            ),
+            SvgPicture.asset(
+              'assets/bell_icon.svg',
+              height: 200,
+              width: 200,
+            ),
+          ],
+        )
+        // ListView.separated(
+        //   itemCount: products.length,
+        //   itemBuilder: (context, index) {
+        //     final product = products[index];
+        //     return ProductListTile(
+        //       product: product,
+        //       quantity: getQuantity(product),
+        //       onTapAdd: () => addItemButtonClickEvent(product),
+        //       onTapRemove: () => removeItemButtonClickEvent(product),
+        //     );
+        //   },
+        //   separatorBuilder: (context, index) {
+        //     return const Divider(height: 1);
+        //   },
+        // ),
+        );
   }
 
   void addItemButtonClickEvent(Product product) {
