@@ -21,6 +21,9 @@ class LocalDatabase {
         );
         log('Created table todos');
       },
+      onOpen: (db) {
+        log('Database opened ${db.path}');
+      },
     );
   }
 }

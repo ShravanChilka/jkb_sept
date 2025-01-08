@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:jkb_sept/core/database/local_database.dart';
+import 'package:jkb_sept/modules/todo/model/get_todo_response_model.dart';
 import 'package:jkb_sept/modules/todo/model/todo_model.dart';
+import 'package:sqflite/sqflite.dart';
 
 class TodoLocalDatabaseService {
   final _db = LocalDatabase.instance.database;
@@ -22,12 +24,28 @@ class TodoLocalDatabaseService {
     }
   }
 
-  Future<List<TodoModel>?> getAllTodos() async {
+  Future<GetTodoResponseModel?> getAllTodos({
+    int limit = 14,
+    int offset = 0,
+  }) async {
     try {
-      final result = await _db.query('todos');
-      return result.map((map) {
+      final total = Sqflite.firstIntValue(
+        await _db.rawQuery('SELECT COUNT(*) FROM todos'),
+      );
+      final result = await _db.query(
+        'todos',
+        limit: limit,
+        offset: offset,
+        orderBy: 'id DESC',
+      );
+      await Future.delayed(const Duration(seconds: 1));
+      final todos = result.map((map) {
         return TodoModel.fromDatabaseMap(map);
       }).toList();
+      return GetTodoResponseModel(
+        todos: todos,
+        total: total ?? 0,
+      );
     } catch (e, s) {
       log('getAllTodos', error: e, stackTrace: s, name: '$runtimeType');
       return null;

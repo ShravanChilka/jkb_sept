@@ -3,6 +3,8 @@ import 'package:jkb_sept/modules/todo/view/create_todo_screen.dart';
 import 'package:jkb_sept/modules/todo/view_model/todo_view_model.dart';
 import 'package:provider/provider.dart';
 
+import 'widgets/all_todo_list_builder.dart';
+
 class AllTodoScreen extends StatelessWidget {
   const AllTodoScreen({super.key});
 
@@ -19,7 +21,7 @@ class AllTodoScreen extends StatelessWidget {
         },
         icon: const Icon(Icons.add),
       ),
-      body: Container(),
+      body: const AllTodoListBuilder(),
     );
   }
 
