@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:jkb_sept/modules/todo/model/get_todo_request_model.dart';
 import 'package:jkb_sept/modules/todo/model/todo_category.dart';
+import 'package:jkb_sept/modules/todo/model/todo_filter_model.dart';
 import 'package:jkb_sept/modules/todo/model/todo_model.dart';
 import 'package:jkb_sept/modules/todo/model/todo_priority.dart';
 import 'package:jkb_sept/modules/todo/model/todo_status.dart';
@@ -11,6 +13,13 @@ class TodoViewModel extends ChangeNotifier {
   TodoStatus status = TodoStatus.pending;
   bool isLoading = false;
   bool isLoadingMore = false;
+  GetTodoRequestModel request = const GetTodoRequestModel(
+    filter: TodoFilterModel(
+      priority: [],
+      category: [],
+      status: [],
+    ),
+  );
 
   int limit = 15;
 
@@ -18,6 +27,12 @@ class TodoViewModel extends ChangeNotifier {
   int total = 0;
 
   final service = TodoLocalDatabaseService();
+
+  int get totalFilters {
+    return request.filter.category.length +
+        request.filter.priority.length +
+        request.filter.status.length;
+  }
 
   void changeTodoCategoryEvent(TodoCategory category) {
     this.category = category;
@@ -57,9 +72,10 @@ class TodoViewModel extends ChangeNotifier {
   }
 
   void fetchAllTodosEvent() async {
+    if (isLoading) return;
     isLoading = true;
     notifyListeners();
-    final result = await service.getAllTodos();
+    final result = await service.getAllTodos(request);
     todos = result?.todos ?? [];
     total = result?.total ?? 0;
     isLoading = false;
@@ -71,9 +87,10 @@ class TodoViewModel extends ChangeNotifier {
     if (todos.length >= total) return;
     isLoadingMore = true;
     notifyListeners();
-    final result = await service.getAllTodos(
+    request = request.copyWith(
       offset: todos.length,
     );
+    final result = await service.getAllTodos(request);
     todos = [...todos, ...result?.todos ?? []];
     total = result?.total ?? 0;
     isLoadingMore = false;
@@ -98,5 +115,75 @@ class TodoViewModel extends ChangeNotifier {
     todos.remove(todo);
     total = total - 1;
     notifyListeners();
+  }
+
+  void markCompletedEvent(TodoModel model) {}
+
+  void searchQueryChangedEvent(String text) {
+    request = request.copyWith(
+      query: text.trim(),
+    );
+    fetchAllTodosEvent();
+  }
+
+  void selectStatusFilterEvent(TodoStatus status) {
+    if (request.filter.status.contains(status)) {
+      request = request.copyWith(
+        filter: request.filter.copyWith(
+          status: [...request.filter.status..remove(status)],
+        ),
+      );
+
+      notifyListeners();
+    } else {
+      request = request.copyWith(
+        filter: request.filter.copyWith(
+          status: [...request.filter.status, status].toList(),
+        ),
+      );
+      notifyListeners();
+    }
+  }
+
+  void applyFilterEvent() {
+    fetchAllTodosEvent();
+  }
+
+  void selectPriorityFilterEvent(TodoPriority priority) {
+    if (request.filter.priority.contains(priority)) {
+      request = request.copyWith(
+        filter: request.filter.copyWith(
+          priority: [...request.filter.priority..remove(priority)],
+        ),
+      );
+
+      notifyListeners();
+    } else {
+      request = request.copyWith(
+        filter: request.filter.copyWith(
+          priority: [...request.filter.priority, priority].toList(),
+        ),
+      );
+      notifyListeners();
+    }
+  }
+
+  void selectCategoryFilterEvent(TodoCategory category) {
+    if (request.filter.category.contains(category)) {
+      request = request.copyWith(
+        filter: request.filter.copyWith(
+          category: [...request.filter.category..remove(category)],
+        ),
+      );
+
+      notifyListeners();
+    } else {
+      request = request.copyWith(
+        filter: request.filter.copyWith(
+          category: [...request.filter.category, category].toList(),
+        ),
+      );
+      notifyListeners();
+    }
   }
 }

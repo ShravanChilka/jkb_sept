@@ -1,6 +1,12 @@
 enum TodoStatus {
   pending,
   completed,
+  ;
+
+  @override
+  String toString() {
+    return name;
+  }
 }
 
 TodoStatus mapToTodoStatus(String name) {

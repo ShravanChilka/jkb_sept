@@ -1,4 +1,13 @@
-enum TodoCategory { personal, work }
+enum TodoCategory {
+  personal,
+  work,
+  ;
+
+  @override
+  String toString() {
+    return name;
+  }
+}
 
 TodoCategory mapToTodoCategory(String name) {
   switch (name) {

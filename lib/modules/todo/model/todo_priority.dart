@@ -1,4 +1,14 @@
-enum TodoPriority { low, medium, high }
+enum TodoPriority {
+  low,
+  medium,
+  high,
+  ;
+
+  @override
+  String toString() {
+    return name;
+  }
+}
 
 TodoPriority mapToTodoPriority(String name) {
   switch (name) {

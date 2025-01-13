@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jkb_sept/modules/todo/model/todo_model.dart';
+import 'package:jkb_sept/modules/todo/view/create_todo_screen.dart';
 import 'package:jkb_sept/modules/todo/view/dialog/todo_dialog_helper.dart';
 import 'package:jkb_sept/modules/todo/view_model/todo_view_model.dart';
 import 'package:provider/provider.dart';
@@ -23,20 +24,13 @@ class ViewTodoScreen extends StatelessWidget {
             title: const Text('Todo'),
             actions: [
               IconButton(
-                onPressed: () {
-                  TodoDialogHelper.showDeleteConfirmationDialog(
-                    context,
-                    () {
-                      context.read<TodoViewModel>().deleteTodoEvent(
-                            todo: model,
-                            onCompleted: () {
-                              Navigator.of(context).pop();
-                            },
-                          );
-                    },
-                  );
-                },
+                onPressed: () => _onTapDelete(context),
                 icon: const Icon(Icons.delete_outline_rounded),
+              ),
+              const SizedBox(width: 16),
+              IconButton(
+                onPressed: () => _onTapEdit(context),
+                icon: const Icon(Icons.edit),
               ),
               const SizedBox(width: 24),
             ],
@@ -62,6 +56,31 @@ class ViewTodoScreen extends StatelessWidget {
         ),
         const CreateTodoLoaderOverlay(),
       ],
+    );
+  }
+
+  void _onTapDelete(BuildContext context) {
+    TodoDialogHelper.showDeleteConfirmationDialog(
+      context,
+      () {
+        context.read<TodoViewModel>().deleteTodoEvent(
+              todo: model,
+              onCompleted: () {
+                Navigator.of(context).pop();
+              },
+            );
+      },
+    );
+  }
+
+  void _onTapEdit(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => ChangeNotifierProvider.value(
+          value: context.read<TodoViewModel>(),
+          child: const CreateTodoScreen(),
+        ),
+      ),
     );
   }
 }
