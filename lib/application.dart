@@ -1,20 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:jkb_sept/screens/burger_screen.dart';
-import 'package:jkb_sept/screens/home_screen.dart';
+import 'package:jkb_sept/modules/auth/view_model/auth_view_model.dart';
+import 'package:jkb_sept/modules/home/view_model/home_view_model.dart';
+import 'package:provider/provider.dart';
+
+import 'modules/auth/view/auth_guard.dart';
 
 class Application extends StatelessWidget {
   const Application({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.green,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => AuthViewModel(),
         ),
-        useMaterial3: true,
+        ChangeNotifierProvider(
+          create: (context) => HomeViewModel(),
+        ),
+      ],
+      child: MaterialApp(
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.green,
+          ),
+          useMaterial3: true,
+        ),
+        home: const AuthGuard(),
       ),
-      home: const HomeScreen(),
     );
   }
 }

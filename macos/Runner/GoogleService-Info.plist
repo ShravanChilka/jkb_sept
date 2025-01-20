@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1051219559868-rhad8g6rrrvom68mcfq53n3is1cbp8qq.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1051219559868-rhad8g6rrrvom68mcfq53n3is1cbp8qq</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1051219559868-vu9lm5psq3pqd3j8b92pruoqtr014i95.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCklYvKU8wBVvLMDg2QpzUgH5jrY-e6itM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1051219559868</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.jkbSept</string>
+	<key>PROJECT_ID</key>
+	<string>jkb-sept-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>jkb-sept-app.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1051219559868:ios:e07c8c1d27345e544a17b9</string>
+</dict>
+</plist>
