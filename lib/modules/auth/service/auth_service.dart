@@ -5,7 +5,7 @@ class AuthService {
   final _googleSignIn = GoogleSignIn();
   final _firebaseAuth = FirebaseAuth.instance;
 
-  Future<User?> getUser() async {
+  User? getUser() {
     return _firebaseAuth.currentUser;
   }
 
@@ -21,6 +21,7 @@ class AuthService {
   }
 
   Future<void> logoutUser() async {
+    await _googleSignIn.signOut();
     await _firebaseAuth.signOut();
   }
 }

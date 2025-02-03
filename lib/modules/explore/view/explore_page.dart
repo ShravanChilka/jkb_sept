@@ -6,6 +6,9 @@ class ExplorePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ExploreWallpapersGridViewBuilder();
+    return RefreshIndicator(
+      onRefresh: () async {},
+      child: const ExploreWallpapersGridViewBuilder(),
+    );
   }
 }

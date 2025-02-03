@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1051219559868:android:467f41a216f732a14a17b9",
         "android_client_info": {
-          "package_name": "com.example.jkb_sept"
+          "package_name": "com.example.jkbSept"
         }
       },
       "oauth_client": [
@@ -34,7 +34,7 @@
               "client_id": "1051219559868-rhad8g6rrrvom68mcfq53n3is1cbp8qq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.jkb_sept"
+                "bundle_id": "com.example.jkbSept"
               }
             }
           ]
@@ -78,7 +78,7 @@
               "client_id": "1051219559868-rhad8g6rrrvom68mcfq53n3is1cbp8qq.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.jkb_sept"
+                "bundle_id": "com.example.jkbSept"
               }
             }
           ]

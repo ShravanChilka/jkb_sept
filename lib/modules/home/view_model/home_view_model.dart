@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jkb_sept/modules/favourites/view/favourites_page.dart';
+import 'package:jkb_sept/modules/favourites/view/favourites_page_provider.dart';
 import 'package:jkb_sept/modules/home/model/bottom_nav_model.dart';
 
 import '../../explore/view/explore_page_provider.dart';
@@ -14,7 +15,7 @@ class HomeViewModel extends ChangeNotifier {
     BottomNavModel(
       name: 'Favourites',
       icon: Icon(Icons.favorite),
-      page: FavouritesPage(),
+      page: FavouritesPageProvider(),
     ),
   ];
 

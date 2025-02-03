@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:jkb_sept/modules/explore/model/wallaper_model.dart';
+import 'package:jkb_sept/modules/explore/model/wallapaper_model.dart';
 import 'package:jkb_sept/modules/explore/service/explore_remote_service.dart';
 
 class ExploreViewModel extends ChangeNotifier {
-  List<WallaperModel> wallpapers = [];
+  List<WallapaperModel> wallpapers = [];
 
   final _service = ExploreRemoteService();
 
@@ -13,6 +13,7 @@ class ExploreViewModel extends ChangeNotifier {
       (l) {},
       (r) {
         wallpapers = r.photos;
+
         notifyListeners();
       },
     );

@@ -1,7 +1,7 @@
 import 'package:jkb_sept/modules/explore/model/wallpaper_url_model.dart';
 
-class WallaperModel {
-  const WallaperModel({
+class WallapaperModel {
+  const WallapaperModel({
     required this.id,
     required this.width,
     required this.height,
@@ -14,8 +14,8 @@ class WallaperModel {
     required this.alt,
   });
 
-  factory WallaperModel.fromMap(Map<String, dynamic> map) {
-    return WallaperModel(
+  factory WallapaperModel.fromMap(Map<String, dynamic> map) {
+    return WallapaperModel(
       id: map['id'] as int,
       width: map['width'] as int,
       height: map['height'] as int,
@@ -39,6 +39,21 @@ class WallaperModel {
   final String avgColor;
   final WallpaperUrlModel src;
   final String alt;
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'width': width,
+      'height': height,
+      'url': url,
+      'photographer': photographer,
+      'photographer_url': photographerUrl,
+      'photographer_id': photographerId,
+      'avg_color': avgColor,
+      'src': src.toMap(),
+      'alt': alt,
+    };
+  }
 }
 
 /**

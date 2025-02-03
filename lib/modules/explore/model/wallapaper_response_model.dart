@@ -1,4 +1,4 @@
-import 'package:jkb_sept/modules/explore/model/wallaper_model.dart';
+import 'package:jkb_sept/modules/explore/model/wallapaper_model.dart';
 
 class WallapaperResponseModel {
   const WallapaperResponseModel({
@@ -14,7 +14,7 @@ class WallapaperResponseModel {
       perPage: map['per_page'] as int,
       photos: (map['photos'] as List)
           .map(
-            (e) => WallaperModel.fromMap(e),
+            (e) => WallapaperModel.fromMap(e),
           )
           .toList(),
       totalResults: map['total_results'] as int,
@@ -23,6 +23,6 @@ class WallapaperResponseModel {
 
   final int page;
   final int perPage;
-  final List<WallaperModel> photos;
+  final List<WallapaperModel> photos;
   final int totalResults;
 }
