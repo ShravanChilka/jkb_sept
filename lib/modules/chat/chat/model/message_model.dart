@@ -4,14 +4,19 @@ class MessageModel {
     required this.value,
     required this.sentBy,
     required this.createdAt,
+    required this.isSender,
   });
 
-  factory MessageModel.fromMap(Map<String, dynamic> map) {
+  factory MessageModel.fromMap(
+    Map<String, dynamic> map, {
+    bool isSender = true,
+  }) {
     return MessageModel(
       id: map['id'] as String,
       value: map['value'] as String,
       sentBy: map['sentBy'] as String,
       createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt'] as int),
+      isSender: isSender,
     );
   }
 
@@ -28,4 +33,5 @@ class MessageModel {
   final String value;
   final String sentBy;
   final DateTime createdAt;
+  final bool isSender;
 }

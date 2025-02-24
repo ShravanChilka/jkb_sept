@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:jkb_sept/modules/chat/chat/view_model/chat_view_model.dart';
 import 'package:provider/provider.dart';
 
+import 'messages_list_builder.dart';
+
 class ChatScreenBody extends StatefulWidget {
   const ChatScreenBody({super.key});
 
@@ -16,10 +18,8 @@ class _ChatScreenBodyState extends State<ChatScreenBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Expanded(
-          child: Container(
-            color: Colors.red,
-          ),
+        const Expanded(
+          child: MessagesListBuilder(),
         ),
         Row(
           children: [
@@ -39,9 +39,14 @@ class _ChatScreenBodyState extends State<ChatScreenBody> {
               ),
             ),
             IconButton(
-              onPressed: () {
+              onPressed: () async {
                 final message = messageController.text.trim();
-                context.read<ChatViewModel>().sendMessageEvent(message);
+                await context
+                    .read<ChatViewModel>()
+                    .sendMessageEvent(message)
+                    .then(
+                      (r) => messageController.text = '',
+                    );
               },
               icon: const Icon(Icons.send),
             )

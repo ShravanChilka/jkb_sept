@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jkb_sept/modules/auth/model/user_model.dart';
+import 'package:jkb_sept/modules/chat/chat/model/message_model.dart';
 import 'package:jkb_sept/modules/chat/chat/service/chat_firestore_service.dart';
 
 class ChatViewModel extends ChangeNotifier {
@@ -13,13 +14,20 @@ class ChatViewModel extends ChangeNotifier {
 
   String get appBarTitle => reciever.userName ?? reciever.email ?? '-';
 
-  void sendMessageEvent(String message) {
+  Stream<List<MessageModel>> messages = Stream.empty();
+
+  Future<void> sendMessageEvent(String message) async {
     if (!isChatCreated) return;
-    _service.sendMessage(message, chatId!);
+    await _service.sendMessage(message, chatId!);
+  }
+
+  void loadChatMessages() async {
+    messages = _service.getAllChats(chatId);
+    notifyListeners();
   }
 
   void init() async {
     chatId = await _service.getChatId(reciever);
-    notifyListeners();
+    loadChatMessages();
   }
 }
