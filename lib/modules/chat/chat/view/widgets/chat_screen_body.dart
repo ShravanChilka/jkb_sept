@@ -21,36 +21,39 @@ class _ChatScreenBodyState extends State<ChatScreenBody> {
         const Expanded(
           child: MessagesListBuilder(),
         ),
-        Row(
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8,
-                  vertical: 4,
-                ),
-                child: TextField(
-                  controller: messageController,
-                  onChanged: (value) {},
-                  decoration: const InputDecoration(
-                    hintText: 'Type your message...',
+        Container(
+          color: Theme.of(context).colorScheme.surface,
+          child: Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
+                  child: TextField(
+                    controller: messageController,
+                    onChanged: (value) {},
+                    decoration: const InputDecoration(
+                      hintText: 'Type your message...',
+                    ),
                   ),
                 ),
               ),
-            ),
-            IconButton(
-              onPressed: () async {
-                final message = messageController.text.trim();
-                await context
-                    .read<ChatViewModel>()
-                    .sendMessageEvent(message)
-                    .then(
-                      (r) => messageController.text = '',
-                    );
-              },
-              icon: const Icon(Icons.send),
-            )
-          ],
+              IconButton(
+                onPressed: () async {
+                  final message = messageController.text.trim();
+                  await context
+                      .read<ChatViewModel>()
+                      .sendMessageEvent(message)
+                      .then(
+                        (r) => messageController.text = '',
+                      );
+                },
+                icon: const Icon(Icons.send),
+              )
+            ],
+          ),
         ),
       ],
     );

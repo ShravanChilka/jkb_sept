@@ -4,8 +4,8 @@ import 'package:jkb_sept/modules/chat/all_chat/view_model/all_chat_view_model.da
 import 'package:jkb_sept/modules/chat/chat/view/chat_screen_provider.dart';
 import 'package:provider/provider.dart';
 
-class AllChatListBuilder extends StatelessWidget {
-  const AllChatListBuilder({super.key});
+class SearchUserListBuilder extends StatelessWidget {
+  const SearchUserListBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
