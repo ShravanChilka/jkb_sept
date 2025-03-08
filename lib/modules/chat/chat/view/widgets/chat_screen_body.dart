@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:jkb_sept/modules/chat/chat/view/dialogs/chat_dialog_helper.dart';
+import 'package:jkb_sept/modules/chat/chat/view/widgets/select_photo_bottom_sheet.dart';
 import 'package:jkb_sept/modules/chat/chat/view_model/chat_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +27,12 @@ class _ChatScreenBodyState extends State<ChatScreenBody> {
           color: Theme.of(context).colorScheme.surface,
           child: Row(
             children: [
+              IconButton(
+                onPressed: () {
+                  ChatDialogHelper.showImageBottomSheet(context);
+                },
+                icon: const Icon(Icons.add_photo_alternate_outlined),
+              ),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(

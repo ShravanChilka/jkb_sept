@@ -5,6 +5,7 @@ class MessageModel {
     required this.sentBy,
     required this.createdAt,
     required this.isSender,
+    required this.type,
   });
 
   factory MessageModel.fromMap(
@@ -17,6 +18,7 @@ class MessageModel {
       sentBy: map['sentBy'] as String,
       createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt'] as int),
       isSender: isSender,
+      type: map['type'] != null ? _fromString(map['type']) : MessageType.text,
     );
   }
 
@@ -26,6 +28,7 @@ class MessageModel {
       'value': value,
       'sentBy': sentBy,
       'createdAt': createdAt.millisecondsSinceEpoch,
+      'type': type.name,
     };
   }
 
@@ -34,4 +37,22 @@ class MessageModel {
   final String sentBy;
   final DateTime createdAt;
   final bool isSender;
+  final MessageType type;
+}
+
+enum MessageType {
+  text,
+  image,
+  ;
+}
+
+MessageType _fromString(String value) {
+  switch (value) {
+    case 'text':
+      return MessageType.text;
+    case 'image':
+      return MessageType.image;
+    default:
+      return MessageType.text;
+  }
 }

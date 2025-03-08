@@ -39,4 +39,8 @@ class ChatViewModel extends ChangeNotifier {
   Query<MessageModel> getAllChatsQuery() {
     return _service.getAllChatsQuery(chatId);
   }
+
+  void sendImageMessageEvent(String path) {
+    _service.sendImageMessage(path, chatId!, reciever);
+  }
 }
